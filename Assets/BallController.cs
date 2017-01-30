@@ -13,6 +13,10 @@ public class BallController : MonoBehaviour {
 	//得点を表示させるテキスト
 	private GameObject gameScoreText;
 
+	//スコア計算用変数
+	private  int score = 0; 
+
+		 
 	// Use this for initialization
 	void Start () {
 		//シーン中のGameOverTextオブジェクトを取得
@@ -20,6 +24,10 @@ public class BallController : MonoBehaviour {
 
 		//シーン中のgameScoreTextオブジェクトを取得
 		this.gameScoreText = GameObject.Find("GameScoreText");
+
+		//初期スコアを代入して表示
+		score   = 0;
+		SetScore();
 
 	}
 
@@ -35,12 +43,18 @@ public class BallController : MonoBehaviour {
 	//衝突時に呼ばれる関数
 	void OnCollisionEnter(Collision other) {
 		if (tag == "SmallStarTag") {
-			this.gameScoreText.GetComponent<Text> ().text = "10";
+			 score += 10;
 		} else if (tag == "LargeStarTag") {
-			this.gameScoreText.GetComponent<Text> ().text = "20";
+			 score += 20;
 		}else if(tag == "SmallCloudTag" || tag == "LargeCloudTag") {
-			this.gameScoreText.GetComponent<Text> ().text = "30";
+			score += 30;
 		}
+		SetScore();
+	}
+
+	void SetScore()
+	{
+		this.gameScoreText.GetComponent<Text> ().text = score.ToString();
 	}
 
 }
