@@ -42,11 +42,11 @@ public class BallController : MonoBehaviour {
 
 	//衝突時に呼ばれる関数
 	void OnCollisionEnter(Collision other) {
-		if (tag == "SmallStarTag") {
+		if (other.gameObject.tag == "SmallStarTag") {
 			 score += 10;
-		} else if (tag == "LargeStarTag") {
+		} else if (other.gameObject.tag == "LargeStarTag") {
 			 score += 20;
-		}else if(tag == "SmallCloudTag" || tag == "LargeCloudTag") {
+		}else if(other.gameObject.tag == "SmallCloudTag" || other.gameObject.tag == "LargeCloudTag") {
 			score += 30;
 		}
 		SetScore();
